@@ -1,0 +1,82 @@
+# ========================
+# Environment & Secrets
+# ========================
+.env
+.env.local
+.env.production
+.env.staging
+.env.*
+*.env
+secrets.yml
+secrets.yaml
+
+# Allow the example template (no real secrets inside)
+!.env.example
+
+# ========================
+# Backend (Java / Spring)
+# ========================
+backend/target/
+backend/.mvn/repository/
+backend/*.jar
+backend/*.war
+backend/*.class
+*.iml
+
+# ========================
+# Frontend (Node / Vite)
+# ========================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.cache/
+frontend/build_log.txt
+build_log.txt
+
+# ========================
+# Docker
+# ========================
+# Keep docker-compose.yml but ignore override files with real secrets
+docker-compose.override.yml
+
+# ========================
+# IDE & Editor
+# ========================
+.idea/
+.vscode/
+*.swp
+*.swo
+*.suo
+*.user
+.project
+.classpath
+.settings/
+*.launch
+
+# ========================
+# OS Generated
+# ========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ========================
+# Logs & Temp
+# ========================
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# ========================
+# Test & Coverage
+# ========================
+coverage/
+*.lcov
+.nyc_output/
