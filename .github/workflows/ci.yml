@@ -22,15 +22,33 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build and test backend
+      - name: Make mvnw executable
+        working-directory: ./backend
+        run: chmod +x ./mvnw
+
+      - name: Build and test backend (H2 in-memory, no Postgres needed)
         working-directory: ./backend
         run: ./mvnw clean verify -q
+        env:
+          # These are CI-safe dummy values — tests use H2 in-memory DB
+          DATABASE_URL: jdbc:h2:mem:testdb
+          DATABASE_USERNAME: sa
+          DATABASE_PASSWORD: ""
+          JWT_SECRET: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+          JWT_EXPIRATION_MS: 86400000
+          MAIL_HOST: localhost
+          MAIL_PORT: 25
+          MAIL_USERNAME: ci@test.com
+          MAIL_PASSWORD: test
+          CORS_ALLOWED_ORIGINS: http://localhost:5173
+          PORT: 8080
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:
           name: backend-jar
           path: backend/target/*.jar
+          if-no-files-found: warn
           retention-days: 7
 
   frontend-build:
